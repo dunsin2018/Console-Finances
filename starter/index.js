@@ -86,3 +86,47 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+let totalMonths = finances.length;
+document.getElementById("totalMonths").innerHTML = "Total Months: " + totalMonths;
+
+let total = totalRows();
+document.getElementById("totalValue").innerHTML = "Total: $" + total.toFixed(2);
+
+function totalRows() {
+  let sum = 0;
+  for (let j = 1; j < finances[0].length; j++){
+    sum += finances[j][1]
+  }
+  return sum;
+}
+
+let avgValue = totalAvgValueRow();
+document.getElementById('avgAmounts').innerHTML = "Average change: $" + (avgValue/(finances.length)-1).toFixed(2);
+
+function totalAvgValueRow() {
+  let add = 0;
+  for (let j = 1; j < finances[0].length; j++){
+    add += finances[j][1]
+  }
+  return add;
+}
+let greatestIncrease = { date: '', value: 0 };
+let greatestDecrease = { date: '', value: Infinity };
+
+for (let i = 1; i < finances.length; i++) {
+  let currentValue = finances[i][1];
+  let previousValue = finances[i - 1][1];
+  let difference = currentValue - previousValue;
+
+  if (difference > greatestIncrease.value) {
+    greatestIncrease = { date: finances[i][0], value: difference };
+  }
+
+  if (difference < greatestDecrease.value) {
+    greatestDecrease = { date: finances[i][0], value: difference };
+  }
+}
+
+document.getElementById('greatestIncrease').innerHTML = "Greatest Increase in Profits: " + greatestIncrease.date + " ($" + greatestIncrease.value.toFixed(2) + ")";
+document.getElementById('greatestDecrease').innerHTML = "Greatest Decrease in Profits: " + greatestDecrease.date + " ($" + greatestDecrease.value.toFixed(2) + ")";
