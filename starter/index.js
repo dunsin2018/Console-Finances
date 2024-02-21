@@ -86,3 +86,18 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+let totalMonths = finances.length;
+document.getElementById("totalMonths").innerHTML = "Total Months: " + totalMonths;
+
+let total = totalRows();
+document.getElementById("totalValue").innerHTML = "Total: $" + total.toFixed(2);
+
+function totalRows() {
+  let sum = 0;
+  for (let j = 1; j < finances[0].length; j++){
+    sum += finances[j][1]
+  }
+  return sum;
+}
+
